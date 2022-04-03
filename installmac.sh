@@ -62,6 +62,19 @@ for val in ${mas_apps[@]}; do
 done
 $brewbin/mas upgrade
 
+# Homebrew Taps
+
+declare -a brew_taps=(
+"homebrew/cask-drivers"
+"homebrew/cask-versions"
+"buo/cask-upgrade"
+)
+
+echo Homebrew Taps
+for val in ${brew_taps[@]}; do
+	$brewbin/brew tap $val
+done
+
 # Homebrew Applications
 
 declare -a brew_apps=(
@@ -77,8 +90,7 @@ declare -a brew_apps=(
 echo Homebrew Applications
 for val in ${brew_apps[@]}; do
 	if ! brew ls --versions $val > /dev/null; then
-		#$brewbin/brew install $val
-		echo install app $val
+		$brewbin/brew install $val
 	fi
 done
 
@@ -122,15 +134,15 @@ declare -a cask_apps=(
 "tunnelblick"
 "visual-studio-code"
 "vlc"
-# "vmware-fusion"
+# "vmware-fusion-tech-preview"
 "zoom"
 )
 
 echo Homebrew Casks
 for val in ${cask_apps[@]}; do
 	if ! brew ls --versions --cask $val > /dev/null; then
-		#$brewbin/brew install $val
-		echo install cask $val
+		$brewbin/brew install $val
 	fi
 done
+
 $brewbin/brew upgrade
