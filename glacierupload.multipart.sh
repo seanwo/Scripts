@@ -1,2 +1,2 @@
 #!/bin/bash
-java -jar ~/.glacieruploader/glacieruploader.jar --partsize 1073741824 --multipartupload "$@"
+java -jar ~/local/bin/glacieruploader.jar --partsize 1073741824 --multipartupload "$@"

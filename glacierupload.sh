@@ -1,2 +1,2 @@
 #!/bin/bash
-java -jar ~/.glacieruploader/glacieruploader.jar "$@"
+java -jar ~/local/bin/glacieruploader.jar "$@"

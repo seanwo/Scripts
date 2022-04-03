@@ -99,7 +99,6 @@ done
 
 declare -a cask_apps=(
 "android-file-transfer"
-"android-messages"
 "app-cleaner"
 "arq5"
 "balenaetcher"
