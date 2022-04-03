@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Homebrew
+
 echo Homebrew
 which -s brew
 if [[ $? != 0 ]] ; then
@@ -18,6 +19,7 @@ else
 fi
 
 # Xcode Command Line Tools
+
 echo Xcode CommandLineTools
 if [[ $(xcode-select -p) != '/Library/Developer/CommandLineTools' ]]; then
 	xcode-select --install
@@ -26,14 +28,17 @@ else
 	echo Xcode CommandLineTools already installed.
 fi
 
-# MAS
-echo MAS
+# mas-cli
+
+echo mas-cli
 if brew ls --versions mas > /dev/null; then
 	echo mas-cli already installed.
 else
 	brew install mas
 	echo mas-cli installed.
 fi
+
+# AppStore
 
 declare -a mas_apps=(
 "1474276998" #HP Smart
@@ -49,7 +54,7 @@ declare -a mas_apps=(
 "405399194" #Kindle
 )
 
-echo AppStore applications
+echo AppStore Applications
 for val in ${mas_apps[@]}; do
 	if ! $brewbin/mas list | grep -q "$val"; then
 		$brewbin/mas install $val
@@ -57,17 +62,27 @@ for val in ${mas_apps[@]}; do
 done
 $brewbin/mas upgrade
 
+# Homebrew Applications
+
 declare -a brew_apps=(
 "arp-scan"
-#"aws-elasticbeanstalk"
 "awscli"
-#"bluetoothconnector"
 "ethereum"
 "jenv"
 "node"
 "telnet"
 "wget"
 )
+
+echo Homebrew Applications
+for val in ${brew_apps[@]}; do
+	if ! brew ls --versions $val > /dev/null; then
+		#$brewbin/brew install $val
+		echo install app $val
+	fi
+done
+
+# Homebrew Casks
 
 declare -a cask_apps=(
 "android-file-transfer"
@@ -113,9 +128,9 @@ declare -a cask_apps=(
 
 echo Homebrew Casks
 for val in ${cask_apps[@]}; do
-	if brew ls --versions $val > /dev/null; then
-		$brewbin/brew install $val
+	if ! brew ls --versions --cask $val > /dev/null; then
+		#$brewbin/brew install $val
+		echo install cask $val
 	fi
 done
 $brewbin/brew upgrade
-
