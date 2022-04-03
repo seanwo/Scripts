@@ -18,6 +18,8 @@ else
 	brewbin="/usr/local/bin"
 fi
 
+read -p "Press enter to continue"
+
 # Xcode Command Line Tools
 
 echo Xcode CommandLineTools
@@ -27,6 +29,8 @@ if [[ $(xcode-select -p) != '/Library/Developer/CommandLineTools' ]]; then
 else
 	echo Xcode CommandLineTools already installed.
 fi
+
+read -p "Press enter to continue"
 
 # mas-cli
 
@@ -62,6 +66,8 @@ for val in ${mas_apps[@]}; do
 done
 $brewbin/mas upgrade
 
+read -p "Press enter to continue"
+
 # Homebrew Taps
 
 declare -a brew_taps=(
@@ -74,6 +80,8 @@ echo Homebrew Taps
 for val in ${brew_taps[@]}; do
 	$brewbin/brew tap $val
 done
+
+read -p "Press enter to continue"
 
 # Homebrew Applications
 
@@ -94,6 +102,8 @@ for val in ${brew_apps[@]}; do
 		$brewbin/brew install $val
 	fi
 done
+
+read -p "Press enter to continue"
 
 # Homebrew Casks
 
@@ -133,7 +143,6 @@ declare -a cask_apps=(
 "tunnelblick"
 "visual-studio-code"
 "vlc"
-"vmware-fusion-tech-preview"
 "zoom"
 )
 
@@ -145,3 +154,5 @@ for val in ${cask_apps[@]}; do
 done
 
 $brewbin/brew upgrade
+
+read -p "Press enter to continue"
