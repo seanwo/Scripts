@@ -108,7 +108,6 @@ declare -a cask_apps=(
 "calibre"
 "disk-inventory-x"
 "dropbox"
-"filezilla"
 "firefox"
 "gfxcardstatus"
 "google-chrome"
@@ -122,11 +121,11 @@ declare -a cask_apps=(
 "paintbrush"
 "plex"
 "quicken"
+"rectangle"
 "shotcut"
 "signal"
 "skype"
 "slack"
-"spectacle"
 "spotify"
 "steam"
 "teamviewer"
@@ -135,14 +134,14 @@ declare -a cask_apps=(
 "tunnelblick"
 "visual-studio-code"
 "vlc"
-# "vmware-fusion-tech-preview"
+"vmware-fusion-tech-preview"
 "zoom"
 )
 
 echo Homebrew Casks
 for val in ${cask_apps[@]}; do
 	if ! brew ls --versions --cask $val > /dev/null; then
-		$brewbin/brew install $val
+		$brewbin/brew install --cask $val
 	fi
 done
 
