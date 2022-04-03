@@ -81,6 +81,7 @@ declare -a brew_apps=(
 "arp-scan"
 "awscli"
 "ethereum"
+"gnupg"
 "jenv"
 "node"
 "telnet"
