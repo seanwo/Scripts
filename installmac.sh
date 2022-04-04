@@ -9,13 +9,13 @@ sudo echo
 echo Homebrew
 which -s brew
 if [[ $? != 0 ]] ; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    if [[ $(uname -m) == 'arm64' ]]; then
-    	echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.bash_profile    
-    else
-    	echo 'eval "$(/usr/local/bin/brew shellenv)"' >> ~/.bash_profile
-    fi
-    echo Homebrew installed.
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	if [[ $(uname -m) == 'arm64' ]]; then
+		echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.bash_profile
+	else
+		echo 'eval "$(/usr/local/bin/brew shellenv)"' >> ~/.bash_profile
+	fi
+	echo Homebrew installed.
 fi
 if [[ $(uname -m) == 'arm64' ]]; then
 	eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -111,7 +111,7 @@ done
 
 if ! brew ls --versions jenv > /dev/null; then
 	brew install jenv
-	echo 'export PATH="$HOME/.jenv/bin:$PATH"' >> ~/.bash_profile   
+	echo 'export PATH="$HOME/.jenv/bin:$PATH"' >> ~/.bash_profile
 	echo 'eval "$(jenv init -)"' >> ~/.bash_profile
 	export PATH="$HOME/.jenv/bin:$PATH"
 	eval "$(jenv init -)"
