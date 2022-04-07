@@ -144,7 +144,6 @@ declare -a cask_apps=(
 "disk-inventory-x"
 "dropbox"
 "firefox"
-"gfxcardstatus"
 "google-chrome"
 "google-drive"
 "intellij-idea-ce"
@@ -177,6 +176,12 @@ for val in ${cask_apps[@]}; do
 		brew install --cask $val
 	fi
 done
+
+# gfxcardstatus
+
+if [[ $(system_profiler SPDisplaysDataType | grep 'Chipset Model' | wc -l | xargs) != '1' ]]; then
+	brew install --cask gfxcardstatus
+fi
 
 brew upgrade
 
