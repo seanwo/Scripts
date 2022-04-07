@@ -65,7 +65,6 @@ fi
 # AppStore
 
 declare -a mas_apps=(
-"1474276998" #HP Smart
 "1295203466" #Microsoft Remote Desktop
 "409203825" #Numbers
 "1480068668" #Messenger
@@ -148,7 +147,6 @@ declare -a cask_apps=(
 "gfxcardstatus"
 "google-chrome"
 "google-drive"
-"hp-easy-start"
 "intellij-idea-ce"
 "litecoin"
 "logitech-options"
