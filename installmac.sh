@@ -32,12 +32,25 @@ read -p "Press enter to continue"
 echo Xcode CommandLineTools
 if [[ $(xcode-select -p) != '/Library/Developer/CommandLineTools' ]]; then
 	xcode-select --install
-	echo Xcode CommandLineTools Installed.
+	echo Xcode CommandLineTools installed.
 else
 	echo Xcode CommandLineTools already installed.
 fi
 
 read -p "Press enter to continue"
+
+# Rosetta
+
+if [[ $(uname -m) == 'arm64' ]]; then
+	echo Rosetta
+	if /usr/bin/pgrep oahd >/dev/null 2>&1; then
+		echo Rosetta already installed.
+	else
+		softwareupdate --install-rosetta --agree-to-license
+		echo Rosetta installed.
+	fi
+	read -p "Press enter to continue"
+fi
 
 # mas-cli
 
