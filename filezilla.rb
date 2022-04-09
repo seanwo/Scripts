@@ -2,7 +2,7 @@ cask 'filezilla' do
   version ''
   sha256 :no_check
 
-  url "https://download.filezilla-project.org/client/FileZilla_#{version}_macosx-x86.tar.bz2"
+  url "https://download.filezilla-project.org/client/FileZilla_#{version}_macosx-x86.app.tar.bz2"
   appcast 'https://filezilla-project.org/versions.php?type=client'
   name 'FileZilla'
   homepage 'https://filezilla-project.org/'
