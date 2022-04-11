@@ -147,6 +147,7 @@ declare -a cask_apps=(
 "google-chrome"
 "google-drive"
 "intellij-idea-ce"
+"keybase"
 "litecoin"
 "logitech-options"
 "menumeters"
