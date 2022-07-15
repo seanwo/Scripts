@@ -93,6 +93,7 @@ declare -a brew_taps=(
 "homebrew/cask-drivers"
 "homebrew/cask-versions"
 "buo/cask-upgrade"
+"orangedrangon/apps"
 )
 
 echo Homebrew Taps
@@ -135,6 +136,7 @@ read -p "Press enter to continue"
 
 declare -a cask_apps=(
 "android-file-transfer"
+"android-messages-orangedrangon"
 "app-cleaner"
 "arq5"
 "balenaetcher"
@@ -152,6 +154,7 @@ declare -a cask_apps=(
 "logitech-options"
 "menumeters"
 "mycrypto"
+"openvpn-connect"
 "paintbrush"
 "plex"
 "quicken"
@@ -165,7 +168,6 @@ declare -a cask_apps=(
 "teamviewer"
 "temurin8"
 "timemachineeditor"
-"tunnelblick"
 "visual-studio-code"
 "vlc"
 "zoom"
