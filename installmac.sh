@@ -170,6 +170,8 @@ declare -a cask_apps=(
 "timemachineeditor"
 "visual-studio-code"
 "vlc"
+"yubico-authenticator"
+"yubico-yubikey-manager"
 "zoom"
 )
 
