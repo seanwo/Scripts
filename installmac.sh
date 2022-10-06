@@ -162,7 +162,6 @@ declare -a cask_apps=(
 "shotcut"
 "signal"
 "skype"
-"slack"
 "spotify"
 "steam"
 "teamviewer"
