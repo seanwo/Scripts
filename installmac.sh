@@ -74,7 +74,9 @@ declare -a mas_apps=(
 "409183694" #Keynote
 "937984704" #Amphetamine
 "1186187538" #Ethernet Status
-"405399194" #Kindle
+"302584613" #Kindle
+"1475387142" #Tailscale
+"1168254295" #AmorphousDiskMark
 )
 
 echo AppStore Applications
