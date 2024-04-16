@@ -148,7 +148,6 @@ declare -a cask_apps=(
 "bartender"
 "bbedit"
 "betterzip"
-"blackhole-2ch"
 "calibre"
 "disk-inventory-x"
 "dropbox"
