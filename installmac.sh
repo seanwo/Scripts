@@ -92,7 +92,6 @@ read -p "Press enter to continue"
 # Homebrew Taps
 
 declare -a brew_taps=(
-"homebrew/cask-versions"
 "buo/cask-upgrade"
 "orangedrangon/apps"
 )
@@ -171,7 +170,7 @@ declare -a cask_apps=(
 "skype"
 "spotify"
 "steam"
-"temurin8"
+"temurin@8"
 "timemachineeditor"
 "unetbootin"
 "via"
