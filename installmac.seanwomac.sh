@@ -155,7 +155,6 @@ declare -a cask_apps=(
 "geekbench"
 "google-chrome"
 "google-drive"
-"hp-easy-start"
 "intellij-idea-ce"
 "keybase"
 "localsend"
