@@ -138,6 +138,7 @@ read -p "Press enter to continue"
 # Homebrew Casks
 
 declare -a cask_apps=(
+"android-platform-tools"
 "app-cleaner"
 "applepi-baker"
 "balenaetcher"
@@ -157,7 +158,6 @@ declare -a cask_apps=(
 "intellij-idea-ce"
 "keybase"
 "localsend"
-"macfuse"
 "menumeters"
 "obs"
 "openmtp"
@@ -170,7 +170,6 @@ declare -a cask_apps=(
 "sensiblesidebuttons"
 "shotcut"
 "signal"
-"skype"
 "spotify"
 "steam"
 "temurin@8"
