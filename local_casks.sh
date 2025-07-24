@@ -29,13 +29,9 @@ downloadurl=$(echo "$rawurl" | sed 's/&amp;/\&/g')
 # Path to your Homebrew cask file
 cask=~/Scripts/filezilla.rb
 
-#echo $version
-#echo $downloadurl
-
-# Update version and URL in the cask file
 # Escape ampersands for sed replacement
 sed_safe_url=$(printf '%s\n' "$downloadurl" | sed 's/&/\\\&/g')
+
+# Update version and URL in the cask file
 sed -i -e "s/version \'.*\'/version \'$version\'/g" "$cask"
-#sed -i -e "s@url \".*\"@url \"$encodeurl\"@g" "$cask"
-#sed -i '' "s|url \"\"|  url \"$downloadurl\"|" "$cask"
 sed -i '' "s|\( *\)url \"\"|\1url \"$sed_safe_url\"|" "$cask"
