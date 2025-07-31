@@ -34,4 +34,4 @@ sed_safe_url=$(printf '%s\n' "$downloadurl" | sed 's/&/\\\&/g')
 
 # Update version and URL in the cask file
 sed -i -e "s/version \'.*\'/version \'$version\'/g" "$cask"
-sed -i '' "s|\( *\)url \"\"|\1url \"$sed_safe_url\"|" "$cask"
+sed -i '' "s|^\( *\)url \".*\"|\1url \"$sed_safe_url\"|" "$cask"
