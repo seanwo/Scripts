@@ -37,5 +37,16 @@ rawurl=$(echo "$html" | grep -oE "https://dl[0-9]+\.cdn\.filezilla-project\.org/
 downloadurl=$(echo "$rawurl" | sed 's/&amp;/\&/g')
 
 # Output results (for debugging)
-# echo "Latest FileZilla Version: $version"
-# echo "Download URL: $downloadurl"
+#echo "Latest FileZilla Version: $version"
+#echo "Download URL: $downloadurl"
+
+# Path to your Homebrew cask file
+cask=~/Scripts/filezilla.rb
+
+# Escape ampersands for sed replacement
+sed_safe_url=$(printf '%s\n' "$downloadurl" | sed 's/&/\\\&/g')
+#echo "Safe Download URL: $sed_safe_url"
+
+# Update version and URL in the cask file
+sed -i -e "s/version \'.*\'/version \'$version\'/g" "$cask"
+sed -i '' "s|^\( *\)url \".*\"|\1url \"$sed_safe_url\"|" "$cask"
