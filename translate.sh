@@ -158,7 +158,8 @@ whisper-cli \
   -t "$THREADS" \
   -bs 5 -bo 2 \
   --vad \
-  --vad-model "$VAD_MODEL"
+  --vad-model "$VAD_MODEL" \
+  -et 3.0 -lpt -0.5
 
 if [[ ! -f "$SRT_FILE" ]]; then
   echo "ERROR: Subtitle file not produced: $SRT_FILE" >&2
