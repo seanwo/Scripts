@@ -19,7 +19,7 @@ usage() {
 Usage: $0 [-k] /path/to/original.mp4
 
 Options:
-  -k     Keep intermediates (input.mp4, audio.wav, audio.wav.srt)
+  -k     Keep intermediates (input.mp4, audio.wav)
 
 Environment overrides:
   MODELS_DIR, VAD_DIR, RNNOISE_DIR, WHISPER_MODEL, VAD_MODEL, RNNOISE_MODEL,
@@ -50,13 +50,13 @@ STEM="${BASENAME%.*}"
 WORKDIR="$ORIG_DIR"
 INPUT_MP4="$WORKDIR/input.mp4"
 AUDIO_WAV="$WORKDIR/audio.wav"
-SRT_FILE="$AUDIO_WAV.srt"
+SRT_FILE="$WORKDIR/${STEM}.srt"
 OUTPUT_MP4="$WORKDIR/${STEM}.with-subs.mp4"
 
 # Cleanup on error unless keeping
 cleanup() {
   if [[ $KEEP_INTERMEDIATES -eq 0 ]]; then
-    rm -f "$INPUT_MP4" "$AUDIO_WAV" "$SRT_FILE"
+    rm -f "$INPUT_MP4" "$AUDIO_WAV"
   fi
 }
 trap cleanup EXIT
@@ -159,12 +159,28 @@ whisper-cli \
   -bs 5 -bo 2 \
   --vad \
   --vad-model "$VAD_MODEL" \
-  -et 3.0 -lpt -0.5
+  -et 3.0 -lpt -0.5 \
+  -of "$WORKDIR/${STEM}"
 
 if [[ ! -f "$SRT_FILE" ]]; then
   echo "ERROR: Subtitle file not produced: $SRT_FILE" >&2
   exit 6
 fi
+
+# --- Apply spelling fixes (whole-word, case-insensitive) ----------------------
+echo "== Applying spelling fixes =="
+
+# Add as many pairs as needed (wrong:Correct)
+REPLACEMENTS=(
+  "sailor:Saylor"
+  "seyler:Saylor"
+)
+
+for r in "${REPLACEMENTS[@]}"; do
+  from="${r%%:*}"
+  to="${r#*:}"
+  sed -E -i '' "s/[[:<:]]$from[[:>:]]/$to/gI" "$SRT_FILE"
+done
 
 echo "== Muxing subtitles back into MP4 (mov_text) =="
 ffmpeg -y -i "$INPUT_MP4" -i "$SRT_FILE" \
@@ -178,5 +194,4 @@ if [[ $KEEP_INTERMEDIATES -eq 1 ]]; then
   echo "Intermediates kept:"
   echo "  $INPUT_MP4"
   echo "  $AUDIO_WAV"
-  echo "  $SRT_FILE"
 fi
