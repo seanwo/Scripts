@@ -174,6 +174,12 @@ echo "== Applying spelling fixes =="
 REPLACEMENTS=(
   "sailor:Saylor"
   "seyler:Saylor"
+  "saleh:Saylor"
+  "salah:Saylor"
+  "taylor:Saylor"
+  "seeler:Saylor"
+  "sailer:Saylor"
+  "stahler:Saylor"
 )
 
 for r in "${REPLACEMENTS[@]}"; do
