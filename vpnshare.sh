@@ -10,7 +10,7 @@ case "$cmd" in
   on)
     utun="$(netstat -rn | awk '/^0\/1|^128\.0\/1/ {print $NF; exit}')"
     ip="$(ifconfig "$bridge" | awk '/inet /{print $2; exit}')"
-    subnet="$(echo "$ip" | sed 's/\.[0-9]\+$/\.0\/24/')"
+    subnet="${ip%.*}.0/24"
 
     sudo pfctl -E >/dev/null 2>&1 || true
     sudo pfctl -a "$anchor" -f - <<PF
