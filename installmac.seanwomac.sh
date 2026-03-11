@@ -65,9 +65,8 @@ fi
 # AppStore
 
 declare -a mas_apps=(
-"1295203466" #Microsoft Remote Desktop
+"1295203466" #Windows App
 "409203825" #Numbers
-"1480068668" #Messenger
 "408981434" #iMovie
 "409201541" #Pages
 "1342896380" #Hex Fiend
@@ -77,6 +76,7 @@ declare -a mas_apps=(
 "302584613" #Kindle
 "1475387142" #Tailscale
 "1168254295" #AmorphousDiskMark
+"1347012179" #PairVPN
 )
 
 echo AppStore Applications
@@ -110,10 +110,12 @@ declare -a brew_apps=(
 "awscli"
 "dosbox-x"
 "f3"
+"ffmpeg"
 "gnupg"
 "iperf3"
 "jenv"
 "node"
+"pdftk-java"
 "telnet"
 "wget"
 )
@@ -148,14 +150,12 @@ declare -a cask_apps=(
 "calibre"
 "chatgpt"
 "crossover"
-"disk-inventory-x"
 "dropbox"
-"eloston-chromium"
 "firefox"
-"geekbench"
 "google-chrome"
 "google-drive"
-"intellij-idea-ce"
+"grandperspective"
+"intellij-idea"
 "keybase"
 "localsend"
 "menumeters"
@@ -175,13 +175,12 @@ declare -a cask_apps=(
 "temurin@8"
 "timemachineeditor"
 "unetbootin"
+"ungoogled-chromium"
 "utm"
 "via"
 "visual-studio-code"
 "vlc"
-"webex"
 "yubico-authenticator"
-"yubico-yubikey-manager"
 "zoom"
 )
 

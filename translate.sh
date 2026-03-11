@@ -159,7 +159,7 @@ whisper-cli \
   -bs 5 -bo 2 \
   --vad \
   --vad-model "$VAD_MODEL" \
-  -et 3.0 -lpt -0.5 \
+  -et 5.0 -lpt -0.5 \
   -of "$WORKDIR/${STEM}"
 
 if [[ ! -f "$SRT_FILE" ]]; then
@@ -180,6 +180,9 @@ REPLACEMENTS=(
   "seeler:Saylor"
   "sailer:Saylor"
   "stahler:Saylor"
+  "saler:Saylor"
+  "zahler:Saylor"
+  "zaylor:Saylor"
 )
 
 for r in "${REPLACEMENTS[@]}"; do
