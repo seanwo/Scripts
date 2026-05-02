@@ -10,32 +10,18 @@ VAD_MODEL="${VAD_MODEL:-$VAD_DIR/silero-v5.1.2-ggml.bin}"
 RNNOISE_MODEL="${RNNOISE_MODEL:-$RNNOISE_DIR/somnolent-hogwash-2018-09-01/sh.rnnn}"
 AUDIO_RATE=16000
 AUDIO_CH=1
-AAC_BR="160k"
 THREADS="${THREADS:-$(sysctl -n hw.ncpu 2>/dev/null || echo 8)}"
-KEEP_INTERMEDIATES=0  # set to 1 or pass -k to keep
 
 usage() {
   cat <<EOF
-Usage: $0 [-k] /path/to/original.mp4
-
-Options:
-  -k     Keep intermediates (input.mp4, audio.wav)
+Usage: $0 /path/to/original.mp4
 
 Environment overrides:
   MODELS_DIR, VAD_DIR, RNNOISE_DIR, WHISPER_MODEL, VAD_MODEL, RNNOISE_MODEL,
-  AUDIO_RATE, AUDIO_CH, AAC_BR, THREADS
+  AUDIO_RATE, AUDIO_CH, THREADS
 EOF
   exit 1
 }
-
-# Parse flags
-while getopts ":k" opt; do
-  case "$opt" in
-    k) KEEP_INTERMEDIATES=1 ;;
-    *) usage ;;
-  esac
-done
-shift $((OPTIND - 1))
 
 # Arg check
 [[ $# -eq 1 ]] || usage
@@ -48,16 +34,12 @@ BASENAME="$(basename "$ORIG_MP4")"
 STEM="${BASENAME%.*}"
 
 WORKDIR="$ORIG_DIR"
-INPUT_MP4="$WORKDIR/input.mp4"
 AUDIO_WAV="$WORKDIR/audio.wav"
 SRT_FILE="$WORKDIR/${STEM}.srt"
-OUTPUT_MP4="$WORKDIR/${STEM}.with-subs.mp4"
 
-# Cleanup on error unless keeping
+# Cleanup temporary audio
 cleanup() {
-  if [[ $KEEP_INTERMEDIATES -eq 0 ]]; then
-    rm -f "$INPUT_MP4" "$AUDIO_WAV"
-  fi
+  rm -f "$AUDIO_WAV"
 }
 trap cleanup EXIT
 
@@ -129,14 +111,8 @@ if [[ ! -f "$RNNOISE_MODEL" ]]; then
 fi
 
 # --- Workflow ----------------------------------------------------------------
-echo "== Remuxing video safely =="
-ffmpeg -y -i "$ORIG_MP4" \
-  -c:v copy -c:a aac -b:a "$AAC_BR" -ar 48000 \
-  -movflags +faststart \
-  "$INPUT_MP4"
-
 echo "== Extracting + denoising audio for subtitles =="
-ffmpeg -y -i "$INPUT_MP4" -map 0:a:0 -vn \
+ffmpeg -y -i "$ORIG_MP4" -map 0:a:0 -vn \
   -ac "$AUDIO_CH" -ar "$AUDIO_RATE" \
   -af "arnndn=m=${RNNOISE_MODEL}" \
   -c:a pcm_s16le \
@@ -202,16 +178,4 @@ for r in "${REPLACEMENTS[@]}"; do
   sed -E -i '' "s/[[:<:]]$from[[:>:]]/$to/gI" "$SRT_FILE"
 done
 
-echo "== Muxing subtitles back into MP4 (mov_text) =="
-ffmpeg -y -i "$INPUT_MP4" -i "$SRT_FILE" \
-  -c copy \
-  -c:s mov_text \
-  -metadata:s:s:0 language=eng \
-  "$OUTPUT_MP4"
-
-echo "✅ Done: $OUTPUT_MP4"
-if [[ $KEEP_INTERMEDIATES -eq 1 ]]; then
-  echo "Intermediates kept:"
-  echo "  $INPUT_MP4"
-  echo "  $AUDIO_WAV"
-fi
+echo "✅ Done: $SRT_FILE"
