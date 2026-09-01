@@ -77,6 +77,8 @@ declare -a mas_apps=(
 "1475387142" #Tailscale
 "1168254295" #AmorphousDiskMark
 "1347012179" #PairVPN
+"6469021132" #PDFGear
+"1153157709" #Speedtest
 )
 
 echo AppStore Applications
@@ -92,7 +94,6 @@ read -p "Press enter to continue"
 # Homebrew Taps
 
 declare -a brew_taps=(
-"buo/cask-upgrade"
 "orangedrangon/apps"
 )
 
@@ -110,10 +111,10 @@ declare -a brew_apps=(
 "awscli"
 "dosbox-x"
 "f3"
+"fastfetch"
 "ffmpeg"
 "gnupg"
 "iperf3"
-"jenv"
 "node"
 "pdftk-java"
 "telnet"
@@ -142,11 +143,11 @@ read -p "Press enter to continue"
 declare -a cask_apps=(
 "android-platform-tools"
 "app-cleaner"
+"android-messages-orangedrangon"
 "applepi-baker"
 "balenaetcher"
 "bartender"
 "bbedit"
-"betterzip"
 "brave-browser"
 "calibre"
 "chatgpt"
@@ -175,7 +176,6 @@ declare -a cask_apps=(
 "steam"
 "temurin@8"
 "timemachineeditor"
-"unetbootin"
 "utm"
 "visual-studio-code"
 "vlc"
