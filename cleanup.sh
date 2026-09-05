@@ -1,7 +1,5 @@
 #!/bin/bash
 
-export HOMEBREW_NO_REQUIRE_TAP_TRUST=1
-
 echo Running Brew autoremove
 brew autoremove
 

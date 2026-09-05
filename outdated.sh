@@ -1,7 +1,5 @@
 #!/bin/bash
 
-export HOMEBREW_NO_REQUIRE_TAP_TRUST=1
-
 echo Running local cask update script
 source ~/Scripts/local_casks.sh
 
